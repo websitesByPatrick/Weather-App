@@ -7,7 +7,7 @@ const TabsLayout = () => {
     <Tabs
       screenOptions={{
         tabBarLabelStyle: {
-          fontSize: 18,
+          fontSize: 14,
         },
         headerShown: false,
         tabBarActiveTintColor: "#f97316",
@@ -25,7 +25,7 @@ const TabsLayout = () => {
             <Ionicons
               name={focused ? "home-sharp" : "home-outline"}
               color={color}
-              size={32}
+              size={24}
             />
           ),
         }}
@@ -38,7 +38,7 @@ const TabsLayout = () => {
             <Ionicons
               name={focused ? "calendar-sharp" : "calendar-outline"}
               color={color}
-              size={32}
+              size={24}
             />
           ),
         }}
@@ -51,7 +51,7 @@ const TabsLayout = () => {
             <Ionicons
               name={focused ? "alarm-sharp" : "alarm-outline"}
               color={color}
-              size={32}
+              size={24}
             />
           ),
         }}
@@ -64,7 +64,7 @@ const TabsLayout = () => {
             <Ionicons
               name={focused ? "settings-sharp" : "settings-outline"}
               color={color}
-              size={32}
+              size={24}
             />
           ),
         }}

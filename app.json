@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "pops-weather-app",
-    "slug": "pops-weather-app",
+    "slug": "weather-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -44,6 +44,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "c8027478-38ba-42f5-ab1e-db8b734bf54d"
+      }
+    },
+    "owner": "popsapps"
   }
 }

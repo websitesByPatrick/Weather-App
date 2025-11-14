@@ -32,7 +32,7 @@ export class CurrentWeatherModel {
   uvIndex: number;
   windSpeed: number | string;
   windDirection: number;
-  windGust: number;
+  windGust: number | string;
   skies: string;
 
   constructor(data: CurrentWeatherTypes) {
@@ -47,8 +47,9 @@ export class CurrentWeatherModel {
     this.uvIndex = data.current.uvi;
     this.windSpeed = Math.round(data.current.wind_speed) + " mph";
     this.windDirection = data.current.wind_deg;
-    this.windGust = data.current.wind_gust;
+    this.windGust = data.current.wind_gust ? Math.round(data.current.wind_gust) + " mph" : "None";
     this.skies = data.current.weather[0].main;
+   
   }
 
   formatTime(time: number) {

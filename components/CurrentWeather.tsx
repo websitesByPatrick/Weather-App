@@ -1,8 +1,7 @@
 import { CurrentWeatherModel } from "@/apiModels/CurrentWeatherModel";
-import { LocationContext } from "@/contextProviders/LocationContext";
-import { data } from "@/testData";
-import React, { useContext } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import CityChoice from "@/components/CityChoice";
+import React, { useState } from "react";
+import { ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CurrentWeatherDetailBlock from "./CurrentWeatherDetailBlock";
 
@@ -11,7 +10,8 @@ const CurrentWeather = ({
 }: {
   weatherData: CurrentWeatherModel;
 }) => {
-  const location = useContext(LocationContext);
+  const location: string[] = ["Spring", "Magnolia", "Texarkana"];
+  const [city, setCity] = useState("Home")
 
   return (
     <SafeAreaView className=" bg-black">
@@ -23,45 +23,20 @@ const CurrentWeather = ({
           </Text>
 
           {/* display city lookup */}
-          <View className="mt-10 bg-white/15 p-5 w-full">
+          <View className="my-10 bg-white/15 p-5 w-full">
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             >
-              <View className="flex-row gap-5">
-                <View className="bg-black  p-4 rounded-full border-2 border-white ">
-                  <TouchableOpacity onPress={() => {}}>
-                    <Text className="text-xl text-white text-center">
-                      Current{"\n"}Location
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-                <View className="bg-black  p-4 rounded-full border-2 border-white ">
-                  <TouchableOpacity onPress={() => {}}>
-                    <Text className="text-xl text-white text-center">Spring{"\n"}TX</Text>
-                  </TouchableOpacity>
-                </View>
-                <View className="bg-black  p-4 rounded-full border-2 border-white ">
-                  <TouchableOpacity onPress={() => {}}>
-                    <Text className="text-xl text-white text-center">
-                      Magnolia{"\n"}TX
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-                <View className="bg-black  p-4 rounded-full border-2 border-white ">
-                  <TouchableOpacity onPress={() => {}}>
-                    <Text className="text-xl text-white text-center">
-                      Texarkana{"\n"}AR
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
+              {location.map((choice, index) => (
+                <CityChoice key={index} choice={choice} city={city} setCity={setCity}/>
+              ))}
             </ScrollView>
           </View>
 
-          {/* display the city */}
-          <Text className="my-10 text-5xl text-slate-100">
-            {location.changeLocation ? "new city" : data.city}
+          {/* display city name */}
+          <Text className="text-4xl text-slate-100 mb-10">
+            {city}
           </Text>
 
           {/* display the temperature */}
