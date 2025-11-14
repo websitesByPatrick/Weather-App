@@ -11,7 +11,7 @@ const Index = () => {
     const fetchUsers = async () => {
       try {
         const response = await axios.get(
-          "https://api.openweathermap.org/data/3.0/onecall?lat=30.0799&lon=-95.4172&appid=b34aaafa1ee131ddb88fc4a3857c14d9&units=imperial"
+          "https://api.openweathermap.org/data/3.0/onecall?lat=30.0799&lon=-95.4172&appid=&units=imperial"
         );
         setCurrentWeatherData(new CurrentWeatherModel(response.data));
       } catch (err: any) {
