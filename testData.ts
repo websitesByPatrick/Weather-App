@@ -1,0 +1,16 @@
+export const data = {
+    city: "Spring",
+    currentTemp: "80°",
+    currentCondition: "Clear",
+    sunrise: "7:30 AM",
+    sunset: "5:20 PM",
+    feelsLike: "80°",
+    pressure: "29.52 inHg",
+    humidity: "68%",
+    dewPoint: "65°",
+    uvIndex: "2.2",
+    visibility: "4 miles",
+    windSpeed: "10 mph",
+    windDirection: "NE",
+    windGusts: "15 mph",
+}

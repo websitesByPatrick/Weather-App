@@ -1,35 +1,76 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { Tabs } from "expo-router";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const TabsLayout = () => {
+ 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarLabelStyle: {
+          fontSize: 18,
+        },
         headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
+        tabBarActiveTintColor: "#f97316",
+        tabBarStyle: {
+          backgroundColor: "#000",
+        },
+      }}
+    >
+      
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Current",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? "home-sharp" : "home-outline"}
+              color={color}
+              size={32}
+            />
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="daily"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Daily",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? "calendar-sharp" : "calendar-outline"}
+              color={color}
+              size={32}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="hourly"
+        options={{
+          title: "Hourly",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? "alarm-sharp" : "alarm-outline"}
+              color={color}
+              size={32}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? "settings-sharp" : "settings-outline"}
+              color={color}
+              size={32}
+            />
+          ),
         }}
       />
     </Tabs>
   );
-}
+};
+
+export default TabsLayout;
