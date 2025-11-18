@@ -31,9 +31,10 @@ export class CurrentWeatherModel {
   visibility: number | string;
   uvIndex: number;
   windSpeed: number | string;
-  windDirection: number;
+  windDirection: number | string;
   windGust: number | string;
   skies: string;
+  
 
   constructor(data: CurrentWeatherTypes) {
     this.temp = Math.round(data.current.temp) + "\u00B0";
@@ -41,15 +42,18 @@ export class CurrentWeatherModel {
     this.sunset = this.formatTime(data.current.sunset);
     this.feelsLike = Math.round(data.current.feels_like) + "\u00B0";
     this.humidity = data.current.humidity + "%";
-    this.pressure = (data.current.pressure * .02953).toFixed(2) + " inHg"
+    this.pressure = (data.current.pressure * 0.02953).toFixed(2) + " inHg";
     this.dewPoint = Math.round(data.current.dew_point) + "\u00B0";
-    this.visibility = (data.current.visibility / 5280).toFixed(1) + " miles"
+    this.visibility = (data.current.visibility).toFixed(1) + " miles";
     this.uvIndex = data.current.uvi;
     this.windSpeed = Math.round(data.current.wind_speed) + " mph";
-    this.windDirection = data.current.wind_deg;
-    this.windGust = data.current.wind_gust ? Math.round(data.current.wind_gust) + " mph" : "None";
+    this.windDirection = this.formatWindDirection(data.current.wind_deg);
+    this.windGust = data.current.wind_gust
+      ? Math.round(data.current.wind_gust) + " mph"
+      : "None";
     this.skies = data.current.weather[0].main;
-   
+
+    
   }
 
   formatTime(time: number) {
@@ -62,5 +66,28 @@ export class CurrentWeatherModel {
       AMPM = "PM";
     }
     return hour + ":" + minute + " " + AMPM;
+  }
+
+  formatWindDirection(degree: number) {
+    const val = Math.floor(degree / 22.5 + 0.5);
+    let arr = [
+      "N",
+      "NNE",
+      "NE",
+      "ENE",
+      "E",
+      "ESE",
+      "SE",
+      "SSE",
+      "S",
+      "SSW",
+      "SW",
+      "WSW",
+      "W",
+      "WNW",
+      "NW",
+      "NNW",
+    ];
+    return arr[val % 16];
   }
 }

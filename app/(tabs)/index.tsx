@@ -1,32 +1,33 @@
-import { CurrentWeatherModel } from "@/apiModels/CurrentWeatherModel";
 import CurrentWeather from "@/components/CurrentWeather";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import useLoadWeatherAPI from "@/hooks/weatherAPICall";
+
 const Index = () => {
-  const [CurrentWeatherData, setCurrentWeatherData] =
-    useState<CurrentWeatherModel | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const API_KEY = process.env.EXPO_PUBLIC_API_KEY;
+  const cities = [
+    { city: "Spring", lat: "30.0799", lon: "-95.4172" },
+    { city: "Magnolia", lat: "30.2094", lon: "-95.7508" },
+    { city: "Tomball", lat: "30.0972", lon: "-95.6161" },
+    { city: "Texarkana", lat: "33.4305", lon: "-94.0362" },
+  ];
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get(
-          "https://api.openweathermap.org/data/3.0/onecall?lat=30.0799&lon=-95.4172&appid=&units=imperial"
-        );
-        setCurrentWeatherData(new CurrentWeatherModel(response.data));
-      } catch (err: any) {
-        console.log(err.message + " Error");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchUsers();
-  }, []);
+  const lon = cities[3].lon;
+  const lat = cities[3].lat;
 
-  if (loading || !CurrentWeatherData) {
+  // Load current weather data
+  const { currentWeatherData, loading } = useLoadWeatherAPI({
+    lon,
+    lat,
+    API_KEY,
+  });
+
+  // Confirm data is loaded before rendering
+  if (loading || !currentWeatherData) {
+    console.log("Loading or no data");
     return null;
+  } else {
+    console.log("Data loaded");
   }
 
-  return <CurrentWeather weatherData={CurrentWeatherData} />;
+  return <CurrentWeather weatherData={currentWeatherData} />;
 };
 export default Index;

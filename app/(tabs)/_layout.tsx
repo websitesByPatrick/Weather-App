@@ -10,13 +10,12 @@ const TabsLayout = () => {
           fontSize: 14,
         },
         headerShown: false,
-        tabBarActiveTintColor: "#f97316",
+        tabBarActiveTintColor: "#fff",
         tabBarStyle: {
-          backgroundColor: "#000",
+          backgroundColor: "#240046",
         },
       }}
     >
-      
       <Tabs.Screen
         name="index"
         options={{

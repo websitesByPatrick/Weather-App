@@ -5,20 +5,23 @@ import { ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import CurrentWeatherDetailBlock from "./CurrentWeatherDetailBlock";
 
-const CurrentWeather = ({
-  weatherData,
-}: {
+interface CurrentWeatherProps {
   weatherData: CurrentWeatherModel;
-}) => {
+ 
+}
+
+
+
+const CurrentWeather = ({ weatherData }: CurrentWeatherProps) => {
   const location: string[] = ["Spring", "Magnolia", "Texarkana"];
-  const [city, setCity] = useState("Home")
+  const [city, setCity] = useState("Home");
 
   return (
     <SafeAreaView className=" bg-black">
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View className="flex-1 justify-center items-center">
           {/* display the logo */}
-          <Text className="text-black bg-orange-500 shadow border  shadow-gray-100 text-4xl py-2 px-6 rounded-3xl">
+          <Text className="text-white bg-purple-950 shadow-xl border border-indigo-300 shadow-indigo-500 text-4xl mt-10 py-2 px-6 rounded-3xl">
             Pops Weather
           </Text>
 
@@ -29,15 +32,18 @@ const CurrentWeather = ({
               showsHorizontalScrollIndicator={false}
             >
               {location.map((choice, index) => (
-                <CityChoice key={index} choice={choice} city={city} setCity={setCity}/>
+                <CityChoice
+                  key={index}
+                  choice={choice}
+                  city={city}
+                  setCity={setCity}
+                />
               ))}
             </ScrollView>
           </View>
 
           {/* display city name */}
-          <Text className="text-4xl text-slate-100 mb-10">
-            {city}
-          </Text>
+          <Text className="text-4xl text-slate-100 mb-10">{"City"}</Text>
 
           {/* display the temperature */}
           <Text className="text-8xl text-slate-100 mb-10">
